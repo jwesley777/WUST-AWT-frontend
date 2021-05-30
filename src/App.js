@@ -8,6 +8,7 @@ import PrivateRoute from './helpers/PrivateRoute';
 import ReviewsHome from './pages/reviews';
 import TicketsHome from './pages/tickets';
 import AuthenticationPage from './pages/login';
+import HomePage from './pages/home';
 
 function App() {
   return (
@@ -16,20 +17,15 @@ function App() {
       </header>
 
       <BrowserRouter>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-              <Link to="/reviews">Review Service</Link>
-              <Link to="/tickets">Tickets Service</Link>
-            </li>
-          </ul>
-        </nav>
+      <h2>
+        <Link to="/">Home</Link>
+        </h2>
         <Switch>
           <PrivateRoute service="reviews" path={REVIEWS_HOME} component={ReviewsHome}/>
           <PrivateRoute service="tickets" path={TICKETS_HOME} component={TicketsHome}/>
           <Route path={REVIEWS_LOGIN} component={AuthenticationPage}></Route>
           <Route path={TICKETS_LOGIN} component={AuthenticationPage}></Route>
+          <Route path="/" component={HomePage}></Route>
         </Switch>
       </BrowserRouter>
     </div>

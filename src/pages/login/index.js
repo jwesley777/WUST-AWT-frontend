@@ -7,8 +7,9 @@ function AuthenticationPage(props) {
     const params = new URLSearchParams(props.location.search).get('tab');
 
     
-    const loginForm = params === 'reg' ? <LoginForm service={props.service}/> : <RegistrationForm service={props.service}/>;
     const service = window.location.href.includes('reviews') ? 'reviews' : window.location.href.includes('tickets') ? 'tickets' : null;
+    
+    const loginForm = params !== 'reg' ? <LoginForm service={service}/> : <RegistrationForm service={service}/>;
     return (
         <LoginWrapper>
             Service:{service}

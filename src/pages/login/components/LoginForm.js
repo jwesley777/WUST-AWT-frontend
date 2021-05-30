@@ -1,27 +1,77 @@
 import { useState } from "react";
 
+import {useForm} from 'react-hook-form';
+import useActions from '../../../hooks/useAction';
+import {HOME, REVIEWS_HOME, REVIEWS_LOGIN, TICKETS_HOME, TICKETS_LOGIN} from '../../../constants/routes';
+import {
+  loginUser,
+  LOGIN_FAIL,
+  LOGIN_LOADING,
+  LOGIN_SUCCESS
+} from '../../../actions/loginActions';
+import { NavLink, useHistory } from "react-router-dom";
+
 function LoginForm(props) {
+    
+    const {handleSubmit, register, errors} = useForm();
+    const [submitAction] = useActions([loginUser]);
+    const history = useHistory();
 
-    const [login, setLogin] = useState("");
-    const [password, setPassword] = useState("");
+    const loginPath = props.service==='tickets' ? TICKETS_LOGIN : props.service ==='reviews' ? REVIEWS_LOGIN : null;
+    const servicePath = props.service==='tickets' ? TICKETS_HOME : props.service ==='reviews' ? REVIEWS_HOME : null;
 
-    const handleSubmit = (e) => {
-
-    }
+    
+    const submit = (data) => {
+        console.log(data.login);
+        if (data.login !== '' && data.password !== '') {
+          submitAction(data.login, data.password, props.service).then(e => {
+            if (e.type && e.type === LOGIN_FAIL) {
+              console.log("success");
+            } else if (e.type && e.type === LOGIN_SUCCESS) {
+              history.push(servicePath);
+              console.log(e);
+            }
+          });
+        }
+      };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(submit)}> 
             <label>
                 Login:
-                <input type="text" value="login" onChange={e => setLogin(e.target.value)}/>
+                <input                  
+                    {...register("login",{
+                        required: 'required',
+                        pattern: {
+                        value: /^[A-Z0-9._%+-]+$/i,
+                        message: 'invalid login'
+                        }
+                    })}
+                    name="login"
+                />
             </label>
 
             <label>
                 Password:
-                <input type="text" value="password" onChange={e => setPassword(e.target.value)}/>
+                <input
+                    {...register("password",{
+                    required: 'required',
+                    pattern: {
+                        value: /^[A-Z0-9._]{3,15}$/i,
+                        message: 'invalid password'
+                    }
+                    })}
+                    type="password"
+                    name="password"
+                    id="password"
+                />
             </label>
             
-            <input type="submit" value="Log in" />
+            <button>Submit</button>
+            
+            <NavLink to={`${loginPath}?tab=reg`}>
+                Need an account?
+            </NavLink>
         </form>
     )
 }
