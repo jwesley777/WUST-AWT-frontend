@@ -30,7 +30,7 @@ function RegistrationForm(props) {
     const submit = data => {
         if (data.login !== '' && data.password !== '') {
             submitAction(data.login, data.password, data.firstname, data.surname, props.service);
-            history.push(HomePage);
+            history.push();
         }
 
     };
