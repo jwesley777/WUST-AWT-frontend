@@ -1,21 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FilmsViewWrapper } from "./styles";
+import * as api from '../../../constants/api';
+import axios from "axios";
+import Cookies from "js-cookie";
 
 function FilmsView(props) {
     const [films, setFilms] = useState([
-        {'filmId':1,'filmName':"Aboba"},
-        {'filmId':2,'filmName':"Aboba 2: aboba aboba"}
     ]);
-    const [film, setFilm] = useState({'filmId':0,'filmName':""});
 
+    useEffect(() => {
+        const fetchUser = async () => {
+            const res = await axios.get(api.ticketsGetFilms, {
+                headers: {Authorization: `token ${Cookies.get('ticketsToken')}`}
+            });
+            setFilms(res.data);
+        };
+        fetchUser();
+    },[]);
 
     return (
         <FilmsViewWrapper>
             <h2>Films</h2>
             <ul>
                 {films.map((o) => 
-                <li key={o.filmId}>id={o.filmId} 
-                    , name={o.filmName} 
+                <li key={o.id}>id={o.id} 
+                    , name={o.name} <button onClick={() => props.setFilmId(o.id)}>Choose</button>
                 </li>)}
             </ul>
         </FilmsViewWrapper>                 

@@ -1,21 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TicketsViewWrapper } from "./styles";
+import * as api from '../../../constants/api';
+import Cookies from "js-cookie";
+import axios from "axios";
 
 function TicketsView(props) {
     const [tickets, setTickets] = useState([
-        {'ticketId':2,'col':1,'row':1},
-        {'ticketId':1,'col':2,'row':1}
     ]);
-    const [ticket, setTicket] = useState({'ticketId':0,'col':0,'row':0});
 
+    useEffect(() => {
+        const fetchUser = async () => {
+            const res = await axios.get(api.ticketsGetTickets, {
+                headers: {Authorization: `token ${Cookies.get('ticketsToken')}`}
+            });
+            setTickets(res.data);
+        };
+        fetchUser();
+    },[]);
 
     return (
         <TicketsViewWrapper>
             <h2>Tickets</h2>
             <ul>
                 {tickets.map((o) => 
-                <li key={o.ticketId}>id={o.ticketId} 
-                    , col={o.col} 
+                <li key={o.id}>id={o.id} 
+                    , sessionId={o.sessionId}
+                    , col={o.column} 
                     , row={o.row}
                 </li>)}
             </ul>

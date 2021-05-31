@@ -12,8 +12,9 @@ function RegistrationForm(props) {
     const history = useHistory();
     const dispatch = useDispatch();
     const [submitAction] = useActions([registerUser]);
-    const isRegisterSuccess = useSelector(state => state.type) === REGISTER_SUCCESS;
-    const isRegisterLoading = useSelector(state => state.type) === REGISTER_LOADING;
+    const [submitActionLogin] = useActions([loginUser])
+    const isRegisterSuccess = useSelector(state => state.login.type) === REGISTER_SUCCESS;
+    const isRegisterLoading = useSelector(state => state.login.type) === REGISTER_LOADING;
 
     const [loading, setLoading] = useState(false);
     
@@ -29,8 +30,11 @@ function RegistrationForm(props) {
 
     const submit = data => {
         if (data.login !== '' && data.password !== '') {
-            submitAction(data.login, data.password, data.firstname, data.surname, props.service);
-            history.push();
+            submitAction(data.login, data.password, data.firstname, data.surname, props.service).then( e=> {
+                if (e.type && e.type === REGISTER_SUCCESS) {
+                    history.push();
+                }
+            });
         }
 
     };

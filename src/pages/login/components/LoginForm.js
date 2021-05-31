@@ -26,9 +26,10 @@ function LoginForm(props) {
         if (data.login !== '' && data.password !== '') {
           submitAction(data.login, data.password, props.service).then(e => {
             if (e.type && e.type === LOGIN_FAIL) {
-              console.log("success");
+              console.log("fail");
             } else if (e.type && e.type === LOGIN_SUCCESS) {
               history.push(servicePath);
+              console.log("success");
               console.log(e);
             }
           });

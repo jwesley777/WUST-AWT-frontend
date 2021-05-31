@@ -79,11 +79,11 @@ export const registerUser = (login, password, firstname, surname, service) => as
     if (res.status !== 200) {
       throw Error(res.data.message);
     }
-    dispatch({
+    return dispatch({
       type: REGISTER_SUCCESS
     });
   } catch (error) {
-    dispatch({
+    return dispatch({
       type: REGISTER_FAIL,
       error
     });

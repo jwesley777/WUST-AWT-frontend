@@ -7,3 +7,8 @@ export const loginUser = (service) => `${resolveServer(service)}/Profile/login`;
 export const logoutUser = (service) => `${resolveServer(service)}/Profile/logout`;
 export const getUser = (service) => `${resolveServer(service)}/Profile`;
 export const registerUser = (service) => `${resolveServer(service)}/Profile`;
+
+export const ticketsGetTickets = `${resolveServer("tickets")}/tickets/my`;
+export const ticketsGetFilms = `${resolveServer("tickets")}/films`;
+export const ticketsGetSessions = (filmId) => `${resolveServer("tickets")}/films/${filmId}/sessions`;
+export const ticketsGetSessionWithTickets = (sessionId) => `${resolveServer("tickets")}/sessions/${sessionId}`;

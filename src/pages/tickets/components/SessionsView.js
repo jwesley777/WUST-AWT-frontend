@@ -1,12 +1,31 @@
-import { useState } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { checkPropTypes } from "prop-types";
+import { useEffect, useState } from "react";
+import * as api from '../../../constants/api';
 import { SessionsViewWrapper } from "./styles";
 
 function SessionsView(props) {
     const [sessions, setSessions] = useState([
-        {'sessionId':1,'datetime':"ever"},
-        {'sessionId':2,'datetime':"never"}
     ]);
-    const [session, setSession] = useState({'sessionId':0,'datetime':""});
+    
+    
+    useEffect(() => {
+        if (props.filmId) {
+            console.log('fetching ' + props.filmId)
+            const fetchUser = async () => {
+                const res = await axios.get(api.ticketsGetSessions(props.filmId), {
+                    headers: {Authorization: `token ${Cookies.get('ticketsToken')}`}
+                });
+                console.log(res.data);
+                setSessions(res.data);
+            };
+            fetchUser();
+        } else {
+            setSessions([]);
+        }
+    },[props.filmId]);
+
 
 
     return (
@@ -14,8 +33,8 @@ function SessionsView(props) {
             <h2>Sessions</h2>
             <ul>
                 {sessions.map((o) => 
-                <li key={o.sessionId}>id={o.sessionId} 
-                    , datetime={o.datetime} 
+                <li key={o.id}>id={o.id} 
+                    , datetime={o.sessionDateTime} <button onClick={() => props.setSessionId(o.id)}>Choose</button>
                 </li>)}
             </ul>
         </SessionsViewWrapper>                 
