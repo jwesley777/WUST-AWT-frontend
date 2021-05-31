@@ -21,10 +21,22 @@ function BuyTicketView(props) {
         } else {
             setSession();
         }
-    },[props.sessionId]);
+    },[props.sessionId, props.boughtTicketTrigger]);
 
     function chooseTicket(r,c) {
-
+        axios.post(api.ticketsBuyTicket,
+        {
+            "SessionId":props.sessionId,
+            "RowNumber":r,
+            "PlaceNumber":c
+        }, 
+        {
+            headers: {Authorization: `token ${Cookies.get('ticketsToken')}`}
+        }).then((res)=>{
+            if (res.status==200) {
+                props.setBoughtTicketTrigger(!props.boughtTicketTrigger);
+            }
+        })
     }
     function range(n) {
         return Array.from(Array(n)).map((_, i) => i+1)

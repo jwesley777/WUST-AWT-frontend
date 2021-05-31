@@ -12,6 +12,7 @@ function TicketsHome(props) {
     const user = useSelector(state => state.user.ticketsUser);
     const [chosenFilmId, setChosenFilmId] = useState("");
     const [chosenSessionId, setChosenSessionId] = useState("");
+    const [boughtTicketTrigger, setBoughtTicketTrigger] = useState(true); // workaround to re-render BuyTicketView
     useEffect(()=> {
 
     },[]);
@@ -27,7 +28,9 @@ function TicketsHome(props) {
             </Column>
             <Column>
                 <SessionsView filmId={chosenFilmId} setSessionId={setChosenSessionId}/>
-                <BuyTicketView sessionId={chosenSessionId}/>
+                <BuyTicketView sessionId={chosenSessionId}
+                boughtTicketTrigger={boughtTicketTrigger} 
+                setBoughtTicketTrigger={setBoughtTicketTrigger}/>
             </Column>
             
         </TicketsHomeWrapper>
