@@ -13,3 +13,5 @@ export const ticketsGetFilms = `${resolveServer("tickets")}/films`;
 export const ticketsGetSessions = (filmId) => `${resolveServer("tickets")}/films/${filmId}/sessions`;
 export const ticketsGetSessionWithTickets = (sessionId) => `${resolveServer("tickets")}/sessions/${sessionId}`;
 export const ticketsBuyTicket = `${resolveServer("tickets")}/sessions/buy`;
+
+export const reviewsLinkToken = `${resolveServer("reviews")}/profile/link`
