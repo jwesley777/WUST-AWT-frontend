@@ -6,8 +6,7 @@ import * as api from '../../../constants/api';
 import { SessionsViewWrapper } from "./styles";
 
 function SessionsView(props) {
-    const [sessions, setSessions] = useState([
-    ]);
+    const [sessions, setSessions] = useState();
     
     
     useEffect(() => {
@@ -22,22 +21,30 @@ function SessionsView(props) {
             };
             fetchUser();
         } else {
-            setSessions([]);
+            setSessions();
         }
     },[props.filmId]);
 
 
 
+
     return (
         <SessionsViewWrapper>
+            {sessions &&
             <h2>Sessions</h2>
+            }
+            {sessions &&
             <ul>
                 {sessions.map((o) => 
-                <li key={o.id}>id={o.id} 
-                    , datetime={o.sessionDateTime} <button onClick={() => props.setSessionId(o.id)}>Choose</button>
+                <li key={o.id}>
+                    <p>Theatre: {o.hall.theatre.name}</p>
+                    <p>Hall: {o.hall.id}</p>
+                    <p>Time: {o.sessionDateTime.replace('T',' ')}</p> <button onClick={() => props.setSessionId(o.id)}>Choose</button>
                 </li>)}
             </ul>
-        </SessionsViewWrapper>                 
+            }
+        </SessionsViewWrapper>    
+                             
     );
 }
 

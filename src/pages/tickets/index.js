@@ -23,7 +23,9 @@ function TicketsHome(props) {
         <TicketsHomeWrapper>
             <Column>
                 <ProfileView user={user}/>
-                <TicketsView/>
+                <TicketsView
+                boughtTicketTrigger={boughtTicketTrigger}
+                />
                 <FilmsView setFilmId={(id) => {setChosenSessionId();setChosenFilmId(id);}}/>
             </Column>
             <Column>

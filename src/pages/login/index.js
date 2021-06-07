@@ -12,7 +12,7 @@ function AuthenticationPage(props) {
     const loginForm = params !== 'reg' ? <LoginForm service={service}/> : <RegistrationForm service={service}/>;
     return (
         <LoginWrapper>
-            Service:{service}
+            <h2>{service}</h2>
             {loginForm}
         </LoginWrapper>
     );

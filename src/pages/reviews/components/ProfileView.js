@@ -20,7 +20,7 @@ function ProfileView(props) {
     return (
         <ProfileViewWrapper>
             <h2>Profile</h2>
-            <p>Id: {props.user.id}</p>
+            <p>{props.user.name} {props.user.surname}</p>
             {props.user.linkToken && <p>LinkToken: {props.user.linkToken}</p> }
             <form onSubmit={handleSubmit(submit)}>
                 <label>

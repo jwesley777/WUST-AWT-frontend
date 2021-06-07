@@ -13,6 +13,7 @@ function FilmsView(props) {
             const res = await axios.get(api.ticketsGetFilms, {
                 headers: {Authorization: `token ${Cookies.get('ticketsToken')}`}
             });
+            console.log(res.data);
             setFilms(res.data);
         };
         fetchUser();
@@ -23,8 +24,11 @@ function FilmsView(props) {
             <h2>Films</h2>
             <ul>
                 {films.map((o) => 
-                <li key={o.id}>id={o.id} 
-                    , name={o.name} <button onClick={() => props.setFilmId(o.id)}>Choose</button>
+                <li key={o.id}>
+                    <div>
+                        <p>{o.name} <button onClick={() => props.setFilmId(o.id)}>Choose</button></p>                        
+                        <p>Duration: {o.durationInMinutes} minutes</p>
+                    </div>
                 </li>)}
             </ul>
         </FilmsViewWrapper>                 

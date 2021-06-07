@@ -44,38 +44,41 @@ function BuyTicketView(props) {
     function makeButton(r,c) {
         let found = session.tickets.find((o) => o.row==r && o.column==c);
         if (found) {
-            return <button>
-                occ
+            return <button className="occupied" onClick = {(e) => {e.preventDefault()}}>
+                *
             </button>
         }
         return (
             <button    
+                className="free"
                 type="button"            
                 onClick={(e) => chooseTicket(r,c)}> 
-                {r}, {c}
+                buy
             </button>
         );
     }
 
-    const getPlaces = () => {        
+    const getPlaces = () => {  
         return range(session.hall.nRows).map((i) => { return (
-            <div>
-                {
+                <div>
+                row: {i} {
                     range(session.hall.nColumns).map((j) => {
                         return makeButton(i,j);
                     })
                 }
-            </div>)
+                </div>
+            )
         });
     }
 
 
     return (
         <BuyTicketViewWrapper>
+        {props.sessionId &&
         <h2>Buy ticket</h2>
-        <p>{props.sessionId}</p>
+        }
             <BuyTicketForm>
-                {session && getPlaces()}
+                        {session && getPlaces()}
             </BuyTicketForm>
         </BuyTicketViewWrapper>
     )

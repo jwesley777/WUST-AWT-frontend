@@ -38,6 +38,7 @@ function LoginForm(props) {
 
     return (
         <form onSubmit={handleSubmit(submit)}> 
+        <p>
             <label>
                 Login:
                 <input                  
@@ -51,7 +52,8 @@ function LoginForm(props) {
                     name="login"
                 />
             </label>
-
+            </p>
+            <p>
             <label>
                 Password:
                 <input
@@ -67,12 +69,14 @@ function LoginForm(props) {
                     id="password"
                 />
             </label>
+            </p>
             
             <button>Submit</button>
-            
+            <p>
             <NavLink to={`${loginPath}?tab=reg`}>
                 Need an account?
             </NavLink>
+            </p>
         </form>
     )
 }
