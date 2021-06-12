@@ -14,7 +14,17 @@ export const ticketsGetSessions = (filmId) => `${resolveServer("tickets")}/films
 export const ticketsGetSessionWithTickets = (sessionId) => `${resolveServer("tickets")}/sessions/${sessionId}`;
 export const ticketsBuyTicket = `${resolveServer("tickets")}/sessions/buy`;
 
+export const ticketsAdminGetTickets = `${resolveServer("tickets")}/admin/tickets`;
+export const ticketsAdminGetTheaters = `${resolveServer("tickets")}/admin/theaters`;
+export const ticketsAdminGetSessions = `${resolveServer("tickets")}/admin/sessions`;
+export const ticketsAdminGetHalls = `${resolveServer("tickets")}/admin/halls`;
+export const ticketsAdminGetFilms = `${resolveServer("tickets")}/admin/films`;
+export const ticketsAdminGetUsers = `${resolveServer("tickets")}/admin/users`;
+
 export const reviewsLinkToken = `${resolveServer("reviews")}/profile/link`;
 export const reviewsGetFilms = `${resolveServer("reviews")}/films`;
 export const reviewsGetReviews = (filmId,verified) => `${resolveServer("reviews")}/reviews?filmId=${filmId}&verifiedOnly=${verified}`;
 export const reviewsPostReview = `${resolveServer("reviews")}/reviews`;
+
+export const reviewsAdminGetFilms = `${resolveServer("reviews")}/admin/films`;
+export const reviewsAdminGetUsers = `${resolveServer("reviews")}/admin/users`;

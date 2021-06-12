@@ -60,7 +60,7 @@ function BuyTicketView(props) {
 
     const getPlaces = () => {  
         return range(session.hall.nRows).map((i) => { return (
-                <div>
+                <div className="placesRow">
                 row: {i} {
                     range(session.hall.nColumns).map((j) => {
                         return makeButton(i,j);

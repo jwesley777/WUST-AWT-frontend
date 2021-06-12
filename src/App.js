@@ -18,7 +18,7 @@ function App() {
 
       <BrowserRouter>
       <h2>
-        <Link to="/">Home</Link>
+        <Link className="homeLink" to="/" style={{marginLeft: "-10px"}}>Home</Link>
         </h2>
         <Switch>
           <PrivateRoute service="reviews" path={REVIEWS_HOME} component={ReviewsHome}/>

@@ -20,7 +20,10 @@ function TicketsView(props) {
 
     return (
         <TicketsViewWrapper>
-            <h2>Tickets</h2>
+            {//<h2>Tickets</h2>
+            }
+            <details>
+            <summary>My tickets</summary>
             {tickets &&
             <ul>
                 {tickets.map((o) => 
@@ -33,6 +36,7 @@ function TicketsView(props) {
             </ul>
             }
             {!tickets && "You don't have tickets yet"}
+            </details>
         </TicketsViewWrapper>                 
     );
 }

@@ -1,3 +1,19 @@
+body {
+  background-image: linear-gradient(to right,rgb(255, 148, 148), rgba(255,0,0,0));
+  margin-left: 15px;
+}
+a:not(.homeLink) {
+  text-decoration: none;
+  color: black;
+  font-size:larger;
+}
+a.homeLink {
+  background-color: red;
+  color: white;
+  padding: 0.1em 0.2em;
+  margin-top: 10em;
+  text-decoration: none;
+}
 * {
     font-family: Arial, Helvetica, sans-serif;
   }
